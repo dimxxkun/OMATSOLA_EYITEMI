@@ -147,7 +147,7 @@ export function Testimonials() {
 
                   {/* Testimonial Text */}
                   <p className="text-lg md:text-xl text-foreground/90 leading-relaxed max-w-3xl">
-                    "{testimonials[currentIndex].feedback}"
+                    &ldquo;{testimonials[currentIndex].feedback}&rdquo;
                   </p>
 
                   {/* Author Info */}
