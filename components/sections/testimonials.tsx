@@ -27,11 +27,11 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Michael Chen",
+    name: "Ebuka Onyeuba",
     role: "CEO",
     company: "AcedxTrades",
     feedback: "Omatsola transformed our brand's online presence. His content strategy and community management skills are exceptional. The growth we've seen in our social media channels has been remarkable.",
-    initials: "MC",
+    initials: "EO",
   },
   {
     id: 3,
