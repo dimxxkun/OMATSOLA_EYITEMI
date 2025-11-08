@@ -8,8 +8,9 @@ import { Projects } from "@/components/sections/projects";
 import { Education } from "@/components/sections/education";
 import { Certifications } from "@/components/sections/certifications";
 import { Achievement } from "@/components/sections/achievement";
-import { Contact } from "@/components/sections/contact";
+import { Testimonials } from "@/components/sections/testimonials";
 import { Stats } from "@/components/sections/stats";
+import { Contact } from "@/components/sections/contact";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
       <Education />
       <Certifications />
       <Achievement />
+      <Testimonials />
       <Stats />
       <Contact />
       <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-muted/30 border-t">
@@ -85,6 +87,18 @@ export default function Home() {
                     }}
                   >
                     Projects
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#testimonials" 
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection("testimonials");
+                    }}
+                  >
+                    Testimonials
                   </a>
                 </li>
                 <li>

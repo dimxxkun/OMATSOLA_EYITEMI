@@ -13,8 +13,9 @@ const navItems = [
   { id: "education", label: "Education" },
   { id: "certifications", label: "Certifications" },
   { id: "achievement", label: "Achievement" },
-  { id: "contact", label: "Contact" },
+  { id: "testimonials", label: "Testimonials" },
   { id: "stats", label: "Stats" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function Navbar() {
