@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Linkedin, Twitter, Instagram, Send, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, Linkedin, Instagram, Send, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/layout/section-header";
@@ -157,7 +157,14 @@ export function Contact() {
                     className="flex items-center gap-4 p-4 rounded-lg hover:bg-accent transition-all duration-300 group hover:scale-[1.02]"
                   >
                     <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <Twitter className="h-5 w-5 text-primary" />
+                      <svg 
+                        className="h-5 w-5 text-primary" 
+                        viewBox="0 0 24 24" 
+                        fill="currentColor"
+                        aria-label="X logo"
+                      >
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      </svg>
                     </div>
                     <div className="flex-1">
                       <p className="text-sm text-muted-foreground">X (Twitter)</p>
