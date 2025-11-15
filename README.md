@@ -14,12 +14,12 @@ A modern, professional portfolio website built with Next.js, TypeScript, Shadcn 
 
 ##  Features
 
-- ✅ Responsive design for all devices
-- ✅ Smooth scrolling navigation
-- ✅ Modern, professional UI
-- ✅ CV download functionality
-- ✅ Image gallery for projects and achievements
-- ✅ Sections: Home, About, Experience, Projects, Education, Achievement, Contact, Stats
+-  Responsive design for all devices
+-  Smooth scrolling navigation
+-  Modern, professional UI
+-  CV download functionality
+-  Image gallery for projects and achievements
+-  Sections: Home, About, Experience, Projects, Education, Achievement, Contact, Stats
 
 ##  Getting Started
 
