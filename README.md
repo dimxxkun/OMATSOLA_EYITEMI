@@ -4,7 +4,7 @@
 
 A modern, professional portfolio website built with Next.js, TypeScript, Shadcn UI, and Tailwind CSS.
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 - **Next.js 16** - React framework with App Router
 - **TypeScript** - Type-safe development
@@ -12,7 +12,7 @@ A modern, professional portfolio website built with Next.js, TypeScript, Shadcn 
 - **Tailwind CSS** - Utility-first CSS framework
 - **Lucide React** - Icon library
 
-## 📋 Features
+##  Features
 
 - ✅ Responsive design for all devices
 - ✅ Smooth scrolling navigation
@@ -21,7 +21,7 @@ A modern, professional portfolio website built with Next.js, TypeScript, Shadcn 
 - ✅ Image gallery for projects and achievements
 - ✅ Sections: Home, About, Experience, Projects, Education, Achievement, Contact, Stats
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -47,7 +47,7 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 portfolio/
@@ -71,7 +71,7 @@ portfolio/
 └── lib/                 # Utility functions
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Adding Content
 
@@ -94,7 +94,7 @@ Update the Google Drive link ID in both files if needed.
 - Profile picture: `public/TEMI-PICTURE.jpg`
 - Project/Achievement images: All other JPG files in `public/`
 
-## 📧 Contact Form Setup
+## Contact Form Setup
 
 The contact form uses Resend to send emails. To enable it:
 
@@ -108,7 +108,7 @@ The contact form uses Resend to send emails. To enable it:
 
 **Note:** Without the API key, the form will still work but won't send emails. You can also use alternative services like SendGrid, Nodemailer, or EmailJS.
 
-## 🚀 Deployment
+## Deployment
 
 ### Deploy to Vercel
 
@@ -124,11 +124,11 @@ npm run build
 npm start
 ```
 
-## 📝 License
+## License
 
 This project is private and proprietary.
 
-## 👤 Author
+## Author
 
 **Omatsola Eyitemi**
 - Media & Communications Specialist
