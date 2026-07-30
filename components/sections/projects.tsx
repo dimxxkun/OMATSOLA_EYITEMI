@@ -242,8 +242,8 @@ export function Projects() {
         />
 
         {/* Apple Segment Control Filter Bar */}
-        <div className="flex justify-center mb-12 overflow-x-auto py-2 px-4 no-scrollbar">
-          <div className="inline-flex items-center shrink-0 gap-1 sm:gap-1.5 p-1.5 glass-card rounded-full border border-border/60 shadow-lg">
+        <div className="flex justify-center mb-12 py-2 px-2 max-w-full">
+          <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 p-1.5 glass-card rounded-2xl sm:rounded-full border border-border/60 shadow-lg max-w-full">
             {filterCategories.map((cat) => (
               <button
                 key={cat.id}
@@ -289,7 +289,7 @@ export function Projects() {
                     src={`/images/projects/${project.image}`}
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                    className="object-cover object-top group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                     loading="lazy"
                     placeholder="blur"
