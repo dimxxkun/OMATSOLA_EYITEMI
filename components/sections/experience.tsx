@@ -71,7 +71,7 @@ export function Experience() {
     {
       title: "Social Media Manager",
       company: "Stay Collection",
-      location: "Lagos, Nigeria (Remote)",
+      location: "UK (Remote)",
       period: "2026 – Present",
       achievements: [
         "Leads digital communications and social media strategy for Stay Collection, elevating brand presence and hospitality storytelling across core channels",
@@ -82,7 +82,7 @@ export function Experience() {
     {
       title: "Social Media Growth Manager",
       company: "About Partners",
-      location: "Lagos, Nigeria (Remote)",
+      location: "UK (Remote)",
       period: "2026",
       achievements: [
         "Spearheaded multi-channel social media growth initiatives and targeted audience acquisition campaigns for About Partners",
