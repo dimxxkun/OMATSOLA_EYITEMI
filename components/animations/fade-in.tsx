@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, ReactNode } from "react";
+import { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 interface FadeInProps {
   children: ReactNode;
@@ -15,72 +16,37 @@ export function FadeIn({
   direction = "up",
   className = "",
 }: FadeInProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const currentRef = ref.current;
-    if (!currentRef) return;
-
-    // Check if element is already visible on mount (for hero section, etc.)
-    const checkInitialVisibility = () => {
-      const rect = currentRef.getBoundingClientRect();
-      const isInViewport = 
-        rect.top < window.innerHeight &&
-        rect.bottom > 0 &&
-        rect.left < window.innerWidth &&
-        rect.right > 0;
-      
-      if (isInViewport) {
-        // Small delay to ensure smooth animation
-        setTimeout(() => setIsVisible(true), 50);
-        return true;
-      }
-      return false;
-    };
-
-    // If already visible, trigger animation immediately
-    if (checkInitialVisibility()) {
-      return;
+  const getVariants = () => {
+    const offset = 30;
+    switch (direction) {
+      case "up":
+        return { hidden: { opacity: 0, y: offset }, visible: { opacity: 1, y: 0 } };
+      case "down":
+        return { hidden: { opacity: 0, y: -offset }, visible: { opacity: 1, y: 0 } };
+      case "left":
+        return { hidden: { opacity: 0, x: offset }, visible: { opacity: 1, x: 0 } };
+      case "right":
+        return { hidden: { opacity: 0, x: -offset }, visible: { opacity: 1, x: 0 } };
+      default:
+        return { hidden: { opacity: 0, y: offset }, visible: { opacity: 1, y: 0 } };
     }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Unobserve after animation triggers to improve performance
-          observer.unobserve(currentRef);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(currentRef);
-
-    return () => {
-      observer.unobserve(currentRef);
-    };
-  }, []);
-
-  const directionClasses = {
-    up: "translate-y-8",
-    down: "-translate-y-8",
-    left: "translate-x-8",
-    right: "-translate-x-8",
   };
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        isVisible
-          ? "opacity-100 translate-y-0 translate-x-0"
-          : `opacity-0 ${directionClasses[direction]}`
-      } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 0.6,
+        delay: delay / 1000,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      variants={getVariants()}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

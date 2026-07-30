@@ -1,26 +1,36 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { Experience } from "@/components/sections/experience";
-import { Projects } from "@/components/sections/projects";
-import { Education } from "@/components/sections/education";
-import { Certifications } from "@/components/sections/certifications";
-import { Achievement } from "@/components/sections/achievement";
-import { Testimonials } from "@/components/sections/testimonials";
-import { Stats } from "@/components/sections/stats";
-import { Contact } from "@/components/sections/contact";
-import { ScrollToTop } from "@/components/layout/scroll-to-top";
+
+const Projects = dynamic(() => import("@/components/sections/projects").then((mod) => mod.Projects));
+const Education = dynamic(() => import("@/components/sections/education").then((mod) => mod.Education));
+const Certifications = dynamic(() => import("@/components/sections/certifications").then((mod) => mod.Certifications));
+const Achievement = dynamic(() => import("@/components/sections/achievement").then((mod) => mod.Achievement));
+const Testimonials = dynamic(() => import("@/components/sections/testimonials").then((mod) => mod.Testimonials));
+const Stats = dynamic(() => import("@/components/sections/stats").then((mod) => mod.Stats));
+const Contact = dynamic(() => import("@/components/sections/contact").then((mod) => mod.Contact));
+const ScrollToTop = dynamic(() => import("@/components/layout/scroll-to-top").then((mod) => mod.ScrollToTop), { ssr: false });
+
+function SectionDivider() {
+  return (
+    <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6">
+      <div className="relative flex items-center justify-center">
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_12px_rgba(59,130,246,0.3)]" />
+        <div className="absolute w-2 h-2 rounded-full bg-primary shadow-md shadow-primary/50" />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Calculate navbar height dynamically
-      const nav = document.querySelector('nav');
-      const navHeight = nav ? nav.offsetHeight : 80;
-      const offset = navHeight + 16; // Add extra 16px for breathing room
+      const offset = 80; // 64px header + 16px padding
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({
@@ -44,88 +54,94 @@ export default function Home() {
       </a>
       <Navbar />
       <Hero />
+      <SectionDivider />
       <About />
+      <SectionDivider />
       <Experience />
+      <SectionDivider />
       <Projects />
+      <SectionDivider />
       <Education />
+      <SectionDivider />
       <Certifications />
+      <SectionDivider />
       <Achievement />
+      <SectionDivider />
       <Testimonials />
+      <SectionDivider />
       <Stats />
+      <SectionDivider />
       <Contact />
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-muted/30 border-t">
+      <footer className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/20 relative border-t border-border/40">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Omatsola Eyitemi</h3>
-              <p className="text-sm text-muted-foreground">
+          <div className="glass-card rounded-3xl p-8 sm:p-12 border border-border/50 shadow-xl grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+                <h3 className="text-xl font-extrabold tracking-tight text-foreground">Omatsola Eyitemi</h3>
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 Media & Communications Specialist | Broadcast Production | Social Media Strategist
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a 
-                    href="#about" 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection("about");
-                    }}
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#projects" 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection("projects");
-                    }}
-                  >
-                    Projects
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#testimonials" 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection("testimonials");
-                    }}
-                  >
-                    Testimonials
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#contact" 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection("contact");
-                    }}
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
+
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Quick Links</h4>
+              <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
+                <a 
+                  href="#about" 
+                  className="text-muted-foreground hover:text-primary transition-colors py-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("about");
+                  }}
+                >
+                  About
+                </a>
+                <a 
+                  href="#projects" 
+                  className="text-muted-foreground hover:text-primary transition-colors py-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("projects");
+                  }}
+                >
+                  Projects
+                </a>
+                <a 
+                  href="#testimonials" 
+                  className="text-muted-foreground hover:text-primary transition-colors py-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("testimonials");
+                  }}
+                >
+                  Testimonials
+                </a>
+                <a 
+                  href="#contact" 
+                  className="text-muted-foreground hover:text-primary transition-colors py-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("contact");
+                  }}
+                >
+                  Contact
+                </a>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Connect</h3>
-              <div className="flex gap-4">
+
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Connect</h4>
+              <div className="flex items-center gap-3">
                 <a
                   href="https://www.linkedin.com/in/eyitemi-omatsola"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-full glass-pill flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all shadow-sm"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 </a>
@@ -134,9 +150,9 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="X (Twitter)"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-full glass-pill flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all shadow-sm"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </a>
@@ -145,25 +161,26 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-full glass-pill flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all shadow-sm"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                   </svg>
                 </a>
                 <a
                   href="mailto:omatsolaeyitemi315@gmail.com"
                   aria-label="Email"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-full glass-pill flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all shadow-sm"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </a>
               </div>
             </div>
           </div>
-          <div className="pt-8 border-t text-center text-sm text-muted-foreground">
+
+          <div className="text-center text-xs font-semibold text-muted-foreground tracking-wide">
             <p>© {new Date().getFullYear()} Omatsola Eyitemi. All rights reserved.</p>
           </div>
         </div>

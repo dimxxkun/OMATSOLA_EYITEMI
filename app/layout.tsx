@@ -6,11 +6,15 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -29,16 +33,24 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Omatsola Eyitemi" }],
   creator: "Omatsola Eyitemi",
+  icons: {
+    icon: [
+      { url: "/images/profile/temi2.png?v=2", type: "image/png" },
+      { url: "/icon.png?v=2", type: "image/png" },
+    ],
+    shortcut: "/images/profile/temi2.png?v=2",
+    apple: "/images/profile/temi2.png?v=2",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://omatsolaeyitemi.com", // Update with your actual domain
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://omatsolaeyitemi.com",
     title: "Omatsola Eyitemi - Media & Communications Specialist",
     description: "Media & Communications Specialist | Broadcast Production | Social Media Strategist | Content Development & Audience Engagement",
     siteName: "Omatsola Eyitemi Portfolio",
     images: [
       {
-        url: "/images/profile/TEMI-PICTURE.jpg",
+        url: "/images/profile/temi2.png",
         width: 1200,
         height: 630,
         alt: "Omatsola Eyitemi",
@@ -50,7 +62,7 @@ export const metadata: Metadata = {
     title: "Omatsola Eyitemi - Media & Communications Specialist",
     description: "Media & Communications Specialist | Broadcast Production | Social Media Strategist",
     creator: "@temi_tmn",
-    images: ["/images/profile/TEMI-PICTURE.jpg"],
+    images: ["/images/profile/temi2.png"],
   },
   robots: {
     index: true,

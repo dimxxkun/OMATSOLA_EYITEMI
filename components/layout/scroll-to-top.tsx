@@ -1,22 +1,30 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.pageYOffset > 300) {
+            setIsVisible(true);
+          } else {
+            setIsVisible(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility, { passive: true });
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
@@ -28,18 +36,22 @@ export function ScrollToTop() {
   };
 
   return (
-    <>
+    <AnimatePresence>
       {isVisible && (
-        <Button
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          size="icon"
-          className="fixed bottom-8 right-8 z-40 rounded-full shadow-lg h-12 w-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
+          className="fixed bottom-8 right-8 z-40 glass-pill rounded-full p-3.5 shadow-2xl text-foreground hover:text-primary border border-border/50 focus:outline-none"
           aria-label="Scroll to top"
         >
           <ArrowUp className="h-5 w-5" />
-        </Button>
+        </motion.button>
       )}
-    </>
+    </AnimatePresence>
   );
 }
 

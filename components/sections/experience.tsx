@@ -1,13 +1,95 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, Award } from "lucide-react";
+import { Briefcase, Award, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/layout/section-header";
+import { motion } from "framer-motion";
+
+interface ExperienceItem {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  achievements: string[];
+}
+
+function ExperienceCard({ exp }: { exp: ExperienceItem }) {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = exp.achievements.length > 3;
+  const displayedAchievements = expanded ? exp.achievements : exp.achievements.slice(0, 3);
+
+  return (
+    <motion.div
+      whileHover={{ y: -3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      className="glass-card rounded-3xl p-5 sm:p-8 space-y-4 sm:space-y-6 relative overflow-hidden border-l-4 border-l-primary"
+    >
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2.5">
+        <div>
+          <h4 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">{exp.title}</h4>
+          <p className="text-sm sm:text-base font-semibold text-primary">{exp.company}</p>
+          <p className="text-xs font-medium text-muted-foreground mt-0.5">{exp.location}</p>
+        </div>
+        <Badge variant="secondary" className="w-fit rounded-full px-3 py-1 text-xs font-semibold bg-secondary/80 border border-border/40">
+          {exp.period}
+        </Badge>
+      </div>
+
+      <ul className="space-y-2.5 sm:space-y-3">
+        {displayedAchievements.map((achievement, idx) => (
+          <li key={idx} className="text-muted-foreground text-xs sm:text-base leading-relaxed flex items-start gap-2.5 sm:gap-3">
+            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+            <span>{achievement}</span>
+          </li>
+        ))}
+      </ul>
+
+      {hasMore && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline pt-1 focus:outline-none"
+        >
+          {expanded ? (
+            <>
+              Show Less <ChevronUp className="h-3.5 w-3.5" />
+            </>
+          ) : (
+            <>
+              Show {exp.achievements.length - 3} More Responsibilities <ChevronDown className="h-3.5 w-3.5" />
+            </>
+          )}
+        </button>
+      )}
+    </motion.div>
+  );
+}
 
 export function Experience() {
-  const workExperience = [
+  const workExperience: ExperienceItem[] = [
+    {
+      title: "Social Media Manager",
+      company: "Stay Collection",
+      location: "Lagos, Nigeria (Remote)",
+      period: "2026 – Present",
+      achievements: [
+        "Leads digital communications and social media strategy for Stay Collection, elevating brand presence and hospitality storytelling across core channels",
+        "Curates and executes high-converting promotional content calendars, guest engagement campaigns, and luxury brand aesthetics",
+        "Leverages social media analytics to optimize posting frequencies, audience interaction, and direct booking conversions",
+      ],
+    },
+    {
+      title: "Social Media Growth Manager",
+      company: "About Partners",
+      location: "Lagos, Nigeria (Remote)",
+      period: "2026",
+      achievements: [
+        "Spearheaded multi-channel social media growth initiatives and targeted audience acquisition campaigns for About Partners",
+        "Designed and implemented strategic digital calendars and content workflows to maximize brand reach and organic follower growth",
+        "Tracked and analyzed key performance indicators (KPIs) to continuously optimize campaign messaging, engagement, and conversion ROI",
+      ],
+    },
     {
       title: "Founder & Creative Director / Social Media Lead",
       company: "The Movie Nerd TV",
@@ -79,7 +161,7 @@ export function Experience() {
     },
   ];
 
-  const leadershipExperience = [
+  const leadershipExperience: ExperienceItem[] = [
     {
       title: "Director of Information",
       company: "Association of Mass Communication Students",
@@ -97,7 +179,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 scroll-mt-24 md:scroll-mt-20"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/20 relative scroll-mt-20"
     >
       <div className="container mx-auto max-w-6xl">
         <SectionHeader 
@@ -105,101 +187,35 @@ export function Experience() {
           description="My professional journey and leadership roles"
         />
 
-        {/* Work Experience */}
-        <div className="mb-12">
-          <div className="flex items-center gap-2 mb-6">
-            <Briefcase className="h-5 w-5 text-primary" />
-            <h3 className="text-2xl font-semibold">Professional Experience</h3>
+        {/* Work Experience Section */}
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+              <Briefcase className="h-5 w-5" />
+            </div>
+            <h3 className="text-2xl font-bold tracking-tight">Professional Experience</h3>
           </div>
           <div className="space-y-6">
             {workExperience.map((exp, index) => (
-              <FadeIn key={index} delay={index * 100}>
-                <Card
-                  className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary"
-                >
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                    <div className="flex-1">
-                      <CardTitle className="text-xl mb-1">{exp.title}</CardTitle>
-                      <CardDescription className="text-base font-medium">
-                        {exp.company}
-                      </CardDescription>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {exp.location}
-                      </p>
-                    </div>
-                    <Badge
-                      variant="secondary"
-                      className="w-fit h-fit text-sm px-3 py-1"
-                    >
-                      {exp.period}
-                    </Badge>
-                  </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2.5">
-                  {exp.achievements.map((achievement, idx) => (
-                    <li
-                      key={idx}
-                      className="text-muted-foreground leading-relaxed flex items-start gap-2.5 text-sm sm:text-base"
-                    >
-                      <span className="text-primary mt-1.5 flex-shrink-0">•</span>
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-                </CardContent>
-              </Card>
+              <FadeIn key={index} delay={index * 80}>
+                <ExperienceCard exp={exp} />
               </FadeIn>
             ))}
           </div>
         </div>
 
-        {/* Leadership Experience */}
+        {/* Leadership Experience Section */}
         <div>
-          <div className="flex items-center gap-2 mb-6">
-            <Award className="h-5 w-5 text-primary" />
-            <h3 className="text-2xl font-semibold">Leadership Experience</h3>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+              <Award className="h-5 w-5" />
+            </div>
+            <h3 className="text-2xl font-bold tracking-tight">Leadership Experience</h3>
           </div>
           <div className="space-y-6">
             {leadershipExperience.map((exp, index) => (
-              <FadeIn key={index} delay={index * 100}>
-                <Card
-                  className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary"
-                >
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                    <div className="flex-1">
-                      <CardTitle className="text-xl mb-1">{exp.title}</CardTitle>
-                      <CardDescription className="text-base font-medium">
-                        {exp.company}
-                      </CardDescription>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {exp.location}
-                      </p>
-                    </div>
-                    <Badge
-                      variant="secondary"
-                      className="w-fit h-fit text-sm px-3 py-1"
-                    >
-                      {exp.period}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2.5">
-                    {exp.achievements.map((achievement, idx) => (
-                      <li
-                        key={idx}
-                        className="text-muted-foreground leading-relaxed flex items-start gap-2.5 text-sm sm:text-base"
-                      >
-                        <span className="text-primary mt-1.5 flex-shrink-0">•</span>
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <FadeIn key={index} delay={index * 80}>
+                <ExperienceCard exp={exp} />
               </FadeIn>
             ))}
           </div>

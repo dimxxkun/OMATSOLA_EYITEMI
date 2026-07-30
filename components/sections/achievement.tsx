@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy } from "lucide-react";
+import { Trophy, Star } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeader } from "@/components/layout/section-header";
+import { motion } from "framer-motion";
 
 export function Achievement() {
   const achievements = [
@@ -58,41 +58,42 @@ export function Achievement() {
   return (
     <section
       id="achievement"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 scroll-mt-24 md:scroll-mt-20"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/20 relative scroll-mt-20"
     >
       <div className="container mx-auto max-w-6xl">
         <SectionHeader 
           title="Achievements"
           description="Key accomplishments and impact in my career"
-          icon={<Trophy className="h-8 w-8 text-primary" />}
+          icon={<Trophy className="h-4 w-4 text-primary" />}
         />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((achievement, index) => (
-            <FadeIn key={index} delay={index * 75}>
-              <Card
-                className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary"
+            <FadeIn key={index} delay={index * 60}>
+              <motion.div
+                whileHover={{ y: -4, scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                className="glass-card rounded-3xl p-6 sm:p-8 h-full flex flex-col justify-between space-y-4 relative overflow-hidden group border border-border/50"
               >
-              <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                  <div className="flex-1">
-                    <CardTitle className="text-xl mb-1">
-                      {achievement.title}
-                    </CardTitle>
+                <div className="space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                      <Star className="w-5 h-5" />
+                    </div>
+                    <Badge
+                      variant="secondary"
+                      className="rounded-full px-3 py-1 text-xs font-semibold bg-secondary/80 border border-border/40"
+                    >
+                      {achievement.year}
+                    </Badge>
                   </div>
-                  <Badge
-                    variant="secondary"
-                    className="w-fit h-fit text-sm px-3 py-1"
-                  >
-                    {achievement.year}
-                  </Badge>
+                  <h4 className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                    {achievement.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {achievement.description}
+                  </p>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  {achievement.description}
-                </p>
-              </CardContent>
-            </Card>
+              </motion.div>
             </FadeIn>
           ))}
         </div>
