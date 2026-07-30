@@ -363,7 +363,7 @@ export function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/85 backdrop-blur-xl z-50 flex items-center justify-center p-4 sm:p-8"
+              className="fixed inset-0 bg-black/90 backdrop-blur-2xl z-50 flex items-center justify-center p-4 sm:p-8"
               onClick={(e) => {
                 if (e.target === e.currentTarget) setSelectedImage(null);
               }}
@@ -376,25 +376,26 @@ export function Projects() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="relative max-w-5xl max-h-[85vh] w-full h-full glass-card rounded-3xl overflow-hidden p-2 border border-white/20 shadow-2xl"
+                className="relative max-w-5xl max-h-[85vh] w-full h-full bg-neutral-950/80 backdrop-blur-xl rounded-3xl overflow-hidden p-2 border border-white/15 shadow-2xl flex items-center justify-center"
               >
                 <Image
                   src={`/images/projects/${selectedImage}`}
                   alt="Selected project"
                   fill
                   className="object-contain rounded-2xl"
+                  priority
                 />
               </motion.div>
 
               <button
-                className="absolute top-6 right-6 w-10 h-10 rounded-full glass-pill flex items-center justify-center text-white text-lg font-bold hover:bg-white/30 transition-colors focus:outline-none z-10 shadow-xl"
+                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all shadow-xl z-10 hover:scale-110"
                 onClick={() => setSelectedImage(null)}
                 aria-label="Close image viewer"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 text-white" />
               </button>
 
-              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-white/80 glass-pill px-4 py-2 rounded-full pointer-events-none shadow-lg">
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-white/90 bg-neutral-900/80 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full pointer-events-none shadow-lg">
                 Press ESC or click outside to close
               </div>
             </motion.div>
