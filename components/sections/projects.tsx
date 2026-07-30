@@ -242,8 +242,8 @@ export function Projects() {
         />
 
         {/* Apple Segment Control Filter Bar */}
-        <div className="flex justify-center mb-12 overflow-x-auto py-2 px-1">
-          <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1.5 glass-card rounded-full border border-border/60 shadow-lg max-w-full">
+        <div className="flex justify-center mb-12 overflow-x-auto py-2 px-4 no-scrollbar">
+          <div className="inline-flex items-center shrink-0 gap-1 sm:gap-1.5 p-1.5 glass-card rounded-full border border-border/60 shadow-lg">
             {filterCategories.map((cat) => (
               <button
                 key={cat.id}
