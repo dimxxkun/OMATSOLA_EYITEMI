@@ -126,7 +126,7 @@ npm start
 
 ## License
 
-This project is private and proprietary.
+Copyright remains with Omatsola Eyitemi. Free noncommercial use is permitted under [LICENSE](LICENSE); commercial use requires a separate written agreement and an agreed fee.
 
 ## Author
 
@@ -135,3 +135,9 @@ This project is private and proprietary.
 - Broadcast Production
 - Social Media Strategist
 - Content Development & Audience Engagement
+
+## Commercial permission
+
+Original material in this repository is available under the [Noncommercial Use and Commercial Permission License](LICENSE). **Noncommercial use is free. Commercial use requires prior written permission and a separate written agreement specifying the scope and agreed fee.** Contact [omatsolaeyitemi315@gmail.com](mailto:omatsolaeyitemi315@gmail.com) with the repository name and intended use.
+
+Portfolio review and recruitment evaluation are permitted without a fee. Third-party components retain their own licenses. Permissions already granted for earlier versions remain valid; the new terms do not revoke those grants. These are custom source-available terms, not an OSI-approved open-source license.
